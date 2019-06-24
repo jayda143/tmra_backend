@@ -7,13 +7,13 @@ router.register('employee', views.EmployeeView)
 router.register('users', views.UserView)
 router.register('training', views.TrainingView)
 router.register('budgets', views.BudgetView, basename='budget')
-router.register(r'trainees', views.TraineesView, basename='trainees')
+router.register('trainees', views.TraineesView, basename='trainees')
 router.register('individualpoints', views.IndividualPointsView)
-router.register('employeeevaluation', views.EmployeeEvaluationView)
+router.register('employeeevaluation', views.EmployeeEvaluationView, basename='employeeevaluation')
 router.register('department', views.DepartmentView)
 router.register('rolesresponsibilities', views.RolesResponsibilitiesView)
 router.register('schedule', views.ScheduleView)
-router.register('employmentdetails', views.EmploymentDetailsView)
+router.register('employmentdetails', views.EmploymentDetailsView, basename='employmentdetails')
 
 urlpatterns = [
 path('', include(router.urls)),

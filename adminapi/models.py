@@ -10,6 +10,7 @@ class Employee(models.Model):
     contact_number = models.IntegerField()
     gender = models.IntegerField()
     birthday = models.DateField()
+    age = models.CharField(max_length=255)
     citizenship = models.CharField(max_length=20)
     height = models.DecimalField(max_digits=16, decimal_places=2)
     weight = models.DecimalField(max_digits=16, decimal_places=2)
@@ -96,13 +97,13 @@ class Schedule(models.Model):
     breakin = models.TimeField()
     logout = models.TimeField()
     def __int__(self):
-       return self.Schedule.id
+       return self.login
 
 #DATABASE MODEL FOR EMPLOYMENT DETAILS TABLE
 class EmploymentDetails(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     department_id = models.ForeignKey(Department, on_delete=models.CASCADE)
-    date_employment = models.DateField()
+    date_employed = models.DateField()
     date_effective = models.DateField()
     roles_responsibilities = models.ForeignKey(RolesResponsibilities, on_delete=models.CASCADE)
     quota = models.DecimalField(max_digits=16, decimal_places=2)

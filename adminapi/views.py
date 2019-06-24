@@ -33,14 +33,20 @@ class TraineesView(viewsets.ModelViewSet):
         if trainingid:
             queryset = queryset.filter(training_name=trainingid)
         return queryset
-    
+
 class IndividualPointsView(viewsets.ModelViewSet):
     queryset = IndividualPoints.objects.all()
     serializer_class = IndividualPointsSerializers
 
 class EmployeeEvaluationView(viewsets.ModelViewSet):
-    queryset = EmployeeEvaluation.objects.all()
     serializer_class = EmployeeEvaluationSerializers
+
+    def get_queryset(self):
+        queryset = EmployeeEvaluation.objects.all()
+        employeeid = self.request.query_params.get('id', None)
+        if employeeid:
+            queryset = queryset.filter(employee_id=employeeid)
+        return queryset
 
 class DepartmentView(viewsets.ModelViewSet):
     queryset = Department.objects.all()
@@ -55,5 +61,11 @@ class ScheduleView(viewsets.ModelViewSet):
     serializer_class = ScheduleSerializers
 
 class EmploymentDetailsView(viewsets.ModelViewSet):
-    queryset = EmploymentDetails.objects.all()
     serializer_class = EmploymentDetailsSerializers
+
+    def get_queryset(self):
+        queryset = EmploymentDetails.objects.all()
+        employee_id = self.request.query_params.get('id', None)
+        if employee_id:
+            queryset = queryset.filter(employee_id=employee_id)
+        return queryset
