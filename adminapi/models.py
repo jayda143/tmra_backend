@@ -63,8 +63,9 @@ class IndividualPoints(models.Model):
     hours_classification = models.CharField(max_length=50)
     hours_duration = models.TimeField()
     actual_hours = models.TimeField()
+
     def __str__(self):
-       return self.employee_id
+        return self.employee_id
 
 #DATABASE MODEL FOR EMPLOYEE EVALUATION TABLE
 class EmployeeEvaluation(models.Model):

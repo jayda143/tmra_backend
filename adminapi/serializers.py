@@ -42,7 +42,6 @@ class BudgetSerializers(serializers.ModelSerializer):
         'description',
         'date',
         'amount')
-        
 
 class TraineesSerializers(serializers.ModelSerializer):
     class Meta:
@@ -51,7 +50,7 @@ class TraineesSerializers(serializers.ModelSerializer):
         
 
 class IndividualPointsSerializers(serializers.ModelSerializer):
-    class Meta:
+    class Meta: 
         model = IndividualPoints
         fields = ('id',
         'url',
@@ -61,7 +60,7 @@ class IndividualPointsSerializers(serializers.ModelSerializer):
         'hours_classification',
         'hours_duration',
         'actual_hours')
-
+        
 class EmployeeEvaluationSerializers(serializers.ModelSerializer):
     class Meta:
         model = EmployeeEvaluation

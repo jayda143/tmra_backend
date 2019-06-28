@@ -35,9 +35,15 @@ class TraineesView(viewsets.ModelViewSet):
         return queryset
 
 class IndividualPointsView(viewsets.ModelViewSet):
-    queryset = IndividualPoints.objects.all()
     serializer_class = IndividualPointsSerializers
 
+    def get_queryset(self):
+        queryset = IndividualPoints.objects.all()
+        employeeid = self.request.query_params.get('id', None)
+        if employeeid:
+            queryset = queryset.filter(employee_id=employeeid)
+        return queryset
+       
 class EmployeeEvaluationView(viewsets.ModelViewSet):
     serializer_class = EmployeeEvaluationSerializers
 
