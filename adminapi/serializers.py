@@ -25,7 +25,7 @@ class EmployeeSerializers(serializers.ModelSerializer):
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','url','employee_id','user_type','password')
+        fields = ('id','url','employee_id','username','password','user_type')
 
 class TrainingSerializers(serializers.ModelSerializer):
     class Meta:

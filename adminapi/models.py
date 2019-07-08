@@ -22,6 +22,7 @@ class Employee(models.Model):
 #DATABASE MODEL FOR USER TABLE
 class User(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
     user_type = models.IntegerField()
     def __str__(self):

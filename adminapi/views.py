@@ -7,8 +7,14 @@ class EmployeeView(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializers
 
 class UserView(viewsets.ModelViewSet):
-    queryset = User.objects.all()
     serializer_class = UserSerializers
+    
+    def get_queryset(self):
+        queryset = User.objects.all()
+        employeeid = self.request.query_params.get('id', None)
+        if employeeid:
+            queryset = queryset.filter(employee_id=employeeid)
+        return queryset
 
 class TrainingView(viewsets.ModelViewSet):
     queryset = Training.objects.all()
