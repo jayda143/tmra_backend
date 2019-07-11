@@ -32,10 +32,11 @@ class User(models.Model):
 class Training(models.Model):
     name = models.CharField(max_length=50, unique=True)
     date = models.DateField()
-    time = models.TimeField()
+    time = models.CharField(max_length=100)
+    timeDisplay = models.CharField(max_length=100)
     speaker = models.CharField(max_length=50)
     venue = models.CharField(max_length=50)
-    training_duration = models.CharField(max_length=50)
+    address = models.CharField(max_length=500,blank=True)
     def __str__(self):
        return self.name
 

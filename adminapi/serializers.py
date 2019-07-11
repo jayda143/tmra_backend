@@ -30,7 +30,7 @@ class UserSerializers(serializers.ModelSerializer):
 class TrainingSerializers(serializers.ModelSerializer):
     class Meta:
         model = Training
-        fields = ('id','url','name','date','time','speaker','venue','training_duration')
+        fields = ('id','url','name','date','time','timeDisplay','speaker','venue','address')
 
 class BudgetSerializers(serializers.ModelSerializer):
     class Meta:
