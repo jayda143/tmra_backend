@@ -18,6 +18,7 @@ class Employee(models.Model):
     status = models.IntegerField()
     def __str__(self):
        return self.employeeID
+    
 
 #DATABASE MODEL FOR USER TABLE
 class User(models.Model):
@@ -30,7 +31,7 @@ class User(models.Model):
 
 #DATABASE MODEL FOR TRAINING TABLE
 class Training(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    training = models.CharField(max_length=50, unique=True)
     date = models.DateField()
     time = models.CharField(max_length=100)
     timeDisplay = models.CharField(max_length=100)
@@ -38,33 +39,39 @@ class Training(models.Model):
     venue = models.CharField(max_length=50)
     address = models.CharField(max_length=500,blank=True)
     def __str__(self):
-       return self.name
+       return self.training
 
 #DATABASE MODEL FOR BUDGET TABLE
 class Budget(models.Model):
-    training_name = models.ForeignKey(Training, on_delete=models.CASCADE)
+    training = models.ForeignKey(Training, on_delete=models.CASCADE)
     reference_number = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     date = models.DateField()
     amount = models.CharField(max_length=255)
     def __str__(self):
-       return self.training_name
+       return self.training
 
 #DATABASE MODEL FOR TRAINEES TABLE
 class Trainees(models.Model):
-    training_name = models.ForeignKey(Training, on_delete=models.CASCADE)
-    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    training = models.ForeignKey(Training, on_delete=models.CASCADE)
     def __str__(self):
-       return self.training_name
+       return self.employee
 
 #DATABASE MODEL FOR INDIVIDUAL POINTS TABLE
 class IndividualPoints(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     date = models.DateField()
-    points = models.IntegerField()
-    hours_classification = models.CharField(max_length=50)
-    hours_duration = models.TimeField()
-    actual_hours = models.TimeField()
+    paid = models.TimeField()
+    notpaid_billable = models.TimeField()
+    extra_workload = models.TimeField()
+    management = models.TimeField()
+    training = models.TimeField()
+    admin = models.TimeField()
+    investment = models.TimeField()
+    non_billable = models.TimeField()
+    sales = models.TimeField()
+    points = models.CharField(max_length=50)
 
     def __str__(self):
         return self.employee_id
@@ -108,7 +115,7 @@ class EmploymentDetails(models.Model):
     department_id = models.ForeignKey(Department, on_delete=models.CASCADE)
     date_employed = models.DateField()
     date_effective = models.DateField()
-    roles_responsibilities = models.ForeignKey(RolesResponsibilities, on_delete=models.CASCADE)
+    roles_responsibilities_id = models.ForeignKey(RolesResponsibilities, on_delete=models.CASCADE)
     quota = models.DecimalField(max_digits=16, decimal_places=2)
     salary_base = models.DecimalField(max_digits=16, decimal_places=2)
     basic_rate = models.DecimalField(max_digits=16, decimal_places=2)

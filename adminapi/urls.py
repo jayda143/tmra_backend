@@ -5,6 +5,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register('employee', views.EmployeeView)
 router.register('users', views.UserView, basename='user')
+router.register('employmentdetails', views.EmploymentDetailsView, basename='employmentdetails')
 router.register('training', views.TrainingView)
 router.register('budgets', views.BudgetView, basename='budget')
 router.register('trainees', views.TraineesView, basename='trainees')
@@ -13,7 +14,7 @@ router.register('employeeevaluation', views.EmployeeEvaluationView, basename='em
 router.register('department', views.DepartmentView)
 router.register('rolesresponsibilities', views.RolesResponsibilitiesView)
 router.register('schedule', views.ScheduleView)
-router.register('employmentdetails', views.EmploymentDetailsView, basename='employmentdetails')
+
 
 urlpatterns = [
 path('', include(router.urls)),

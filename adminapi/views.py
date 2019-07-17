@@ -27,7 +27,7 @@ class BudgetView(viewsets.ModelViewSet):
         queryset = Budget.objects.all()
         trainingid = self.request.query_params.get('id', None)
         if trainingid:
-            queryset = queryset.filter(training_name=trainingid)
+            queryset = queryset.filter(training=trainingid)
         return queryset
 
 class TraineesView(viewsets.ModelViewSet):
@@ -37,7 +37,7 @@ class TraineesView(viewsets.ModelViewSet):
         queryset = Trainees.objects.all()
         trainingid = self.request.query_params.get('id', None)
         if trainingid:
-            queryset = queryset.filter(training_name=trainingid)
+            queryset = queryset.filter(training=trainingid)
         return queryset
 
 class IndividualPointsView(viewsets.ModelViewSet):
