@@ -1,8 +1,7 @@
 from rest_framework import serializers
-from .models import Employee,User,Training,Budget,Trainees,IndividualPoints,EmployeeEvaluation,Department,RolesResponsibilities,Schedule,EmploymentDetails
+from .models import Employee,User,Training,Budget,Trainees,IndividualPoints,EmployeeEvaluation,Department,RolesResponsibilities,Schedule,EmploymentDetails,EmploymentHistory,UserLogs,AccountSettings
 
 class EmployeeSerializers(serializers.ModelSerializer):
-    employeeID = serializers.IntegerField(required=False)
     
     class Meta:
          model = Employee
@@ -21,14 +20,17 @@ class EmployeeSerializers(serializers.ModelSerializer):
          'height',
          'weight',
          'blood_type',
-         'status'
+         'status',
+         'image'
          )
 
 class UserSerializers(serializers.ModelSerializer):
+    employee_id = EmployeeSerializers(read_only=True)
+    employee = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all(), source='employee_id', write_only=False)
     class Meta:
         model = User
-        fields = ('id','url','employee_id','username','password','user_type')
-        depth = 1
+        fields = ('id','url','employee_id','employee','username','password','token','user_type')
+        
 
 class TrainingSerializers(serializers.ModelSerializer):
     class Meta:
@@ -132,4 +134,67 @@ class EmploymentDetailsSerializers(serializers.ModelSerializer):
         'flexi',
         'schedule_id',
         'schedule')
+
+class EmploymentHistorySerializers(serializers.ModelSerializer):
+    employee_id = EmployeeSerializers(read_only=True)
+    employee = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all(), source='employee_id', write_only=False)
+    department_id = DepartmentSerializers(read_only=True)
+    department = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all(), source='department_id', write_only=False)
+    roles_responsibilities_id = RolesResponsibilitiesSerializers(read_only=True)
+    roles_responsibilities = serializers.PrimaryKeyRelatedField(queryset=RolesResponsibilities.objects.all(), source='roles_responsibilities_id', write_only=False)
+    
+    schedule_id = ScheduleSerializers(read_only=True)
+    schedule = serializers.PrimaryKeyRelatedField(queryset=Schedule.objects.all(), source='schedule_id', write_only=False)
+    class Meta:
+        model = EmploymentHistory
+        fields = ('id',
+        'url',
+        'employee_id',
+        'employee',
+        'department_id',
+        'department',
+        'date_employed',
+        'date_effective',
+        'roles_responsibilities_id',
+        'roles_responsibilities',
+        'quota',
+        'salary_base',
+        'basic_rate',
+        'incentive',
+        'challenge_quota',
+        'designation',
+        'assignment',
+        'employee_type',
+        'employment_status',
+        'resignation_date',
+        'end_of_contract',
+        'remarks_for_resignation_termination',
+        'flexi',
+        'schedule_id',
+        'schedule',
+        'date_updated')
+
+class UserLogsSerializers(serializers.ModelSerializer):
+    user_id = UserSerializers(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='user_id', write_only=False)
+    class Meta:
+        model = UserLogs
+        fields = ('id','url','user_id','user','description','action','date')
+
+class AccountSettingsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AccountSettings
+        fields = ('id',
+        'url',
+        'user_type',
+        'employeeProfile',
+        'individualPoints',
+        'trainingSeminar',
+        'positionResponsibilities',
+        'reports',
+        'adminSettings',
+        'departmentSettings',
+        'userSettings',
+        'userLogs'
+        )
         

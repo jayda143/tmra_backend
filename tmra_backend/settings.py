@@ -39,9 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminapi',
     'tmra_backend',
-    'rest_framework',
     'corsheaders',
+    
+    'django.contrib.sites',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth',
+    'rest_auth.registration',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,3 +135,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+#UPLOAD IMAGE
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'upload_media')
+MEDIA_URL = '/media/'
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_REQUIRED = False
+
